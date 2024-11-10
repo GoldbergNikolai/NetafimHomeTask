@@ -1,25 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using TimerService;
 using TimerService.Data;
-using TimerService.Services;
+using TimerService.Services.BackgroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-//builder.Services.AddDbContext<TimerDbContext>(options => options.UseInMemoryDatabase("TimerDb"));
-builder.Services.AddDbContext<TimerDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddHttpClient();
-builder.Services.AddHostedService<TimerExpirationService>();
+services.Configurations();
+services.AddDbContext<TimerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+services.AddHostedService<TimerExpirationService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -27,7 +19,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
 app.MapControllers();
 
+//Create Db in not exists
+using (var serviceScope = app.Services.CreateScope())
+{
+    var dbContext = serviceScope.ServiceProvider.GetRequiredService<TimerDbContext>();
+    dbContext.Database.EnsureCreated();
+}
+
 app.Run();
+
+

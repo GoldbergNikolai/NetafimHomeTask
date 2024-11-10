@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Timer = TimerService.DataModels.Timer;
+using Timer = TimerService.Data.Entities.Timer;
 
 namespace TimerService.Data
 {

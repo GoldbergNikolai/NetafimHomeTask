@@ -7,5 +7,4 @@
         public int Seconds { get; set; }
         public string WebhookUrl { get; set; }
     }
-
 }

@@ -1,6 +1,6 @@
 ﻿namespace TimerService.DataModels
 {
-    public class Timer
+    public class TimerResult
     {
         public Guid Id { get; set; }
         public int Hours { get; set; }
@@ -8,8 +8,7 @@
         public int Seconds { get; set; }
         public string WebhookUrl { get; set; }
         public DateTime DateCreated { get; set; }
-        public string Status { get; set; } = "Started";
-        public int TimeLeft => Math.Max(0, (int)((DateCreated.AddHours(Hours).AddMinutes(Minutes).AddSeconds(Seconds) - DateTime.UtcNow).TotalSeconds));
+        public string Status { get; set; } = Enums.Status.Started.ToString();
+        public int TimeLeft => Math.Max(0, (int)(DateCreated.AddHours(Hours).AddMinutes(Minutes).AddSeconds(Seconds) - DateTime.UtcNow).TotalSeconds);
     }
-
 }
