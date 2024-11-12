@@ -16,7 +16,7 @@ This project is a webhook-based timer service built with .NET 8 and EF Core. It 
 - Run your project in Windows 10+ Pro version(In order to use Windows containers)
 - [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) (Windows Containers required)
-- SQL Server LocalDB/Install SQL server on Docker
+- Install SQL server on Docker
 
 ## Setup Instructions
 
@@ -30,31 +30,8 @@ This project requires Docker to run in **Windows containers** mode. Follow the s
   ```bash
   cd 'C:\Program Files\Docker\Docker'
   ./DockerCli.exe -SwitchDaemon
-  
-### 2. Setup you localDB
 
-- **Step 1**: Check your local DB name if exist any:
-  ```bash
-  sqllocaldb i
-- **Step 2**: Select local DB name, let's say its default 'MSSQLLocalDB', check it's status:
-  ```bash
-  sqllocaldb i MSSQLLocalDB
-- **Step 3**: If status if 'Stopped', enable it:
-  ```bash
-  sqllocaldb start MSSQLLocalDB
-- **Optional Step**: If you want to delete existing DB (Or recreate it):
-  ```bash
-  sqllocaldb delete MSSQLLocalDB
-- **Step 4**: If local DB doesn't exists (deleted) create + start it:
-  ```bash
-  sqllocaldb create MSSQLLocalDB
-  sqllocaldb start MSSQLLocalDB
-
-- **Step 5**: Verify local DB created and running (Should be at status 'Running'):
-  ``bash
-  sqllocaldb i MSSQLLocalDB
-
-### 3.To set up SQL Server on Docker
+### 2.To set up SQL Server on Docker
 
 - **Step 1**: Pull the SQL Server Docker Image:
   ```bash
@@ -65,6 +42,6 @@ This project requires Docker to run in **Windows containers** mode. Follow the s
   docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=A1s2D3f4G5h6" -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2022-latest
   ```
 - **Step 3**: Check what IpAddress docker created SQL server on:
-	a. Go to Docker container you created(You can spot it by first 10 chars of long sequence you got after running command on paragragh 2.) into Inspect TAB
-	b. Search for IpAddress under the NetworkSettings
-	c. COPY it and paste in appsettings.json -> DefaultConnection-> Server=<ip_address_you_copied>
+	- a. Go to Docker container you created(You can spot it by first 10 chars of long sequence you got after running command on paragragh 2.) into Inspect TAB
+	- b. Search for IpAddress under the NetworkSettings
+	- c. COPY it and paste in appsettings.json -> DefaultConnection-> Server=<ip_address_you_copied>
