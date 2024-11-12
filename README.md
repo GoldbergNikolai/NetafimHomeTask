@@ -31,7 +31,7 @@ This project requires Docker to run in **Windows containers** mode. Follow the s
   cd 'C:\Program Files\Docker\Docker'
   ./DockerCli.exe -SwitchDaemon
 
-### 2.To set up SQL Server on Docker
+### 2. To set up SQL Server on Docker
 
 - **Step 1**: Pull the SQL Server Docker Image:
   ```bash
@@ -45,3 +45,7 @@ This project requires Docker to run in **Windows containers** mode. Follow the s
 	- a. Go to Docker container you created(You can spot it by first 10 chars of long sequence you got after running command on paragragh 2.) into Inspect TAB
 	- b. Search for IpAddress under the NetworkSettings
 	- c. COPY it and paste in appsettings.json -> DefaultConnection-> Server=<ip_address_you_copied>
+### 3. How to run project
+- **Step 1**: Build solution
+- **Step 2**: Select Docker as Enviroment
+- **Step 3**: Run project
