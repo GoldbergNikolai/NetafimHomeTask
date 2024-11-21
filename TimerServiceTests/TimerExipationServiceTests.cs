@@ -50,7 +50,7 @@ namespace TimerServiceTests
             _scopeFactory = serviceCollection.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
 
             // Initialize the TimerExpirationService
-            _timerExpirationService = new TimerExpirationService(_logger.Object, _mapper, _scopeFactory, _mockHttpClientFactory.Object);
+            _timerExpirationService = new TimerExpirationService(_logger.Object, _scopeFactory, _mockHttpClientFactory.Object);
         }
 
         [TearDown]

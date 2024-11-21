@@ -1,22 +1,18 @@
-﻿using AutoMapper;
-using TimerService.Data;
+﻿using TimerService.Data;
 
 namespace TimerService.Services.BackgroundServices
 {
     public class TimerExpirationService : BackgroundService
     {
         private readonly ILogger<TimerExpirationService> _logger;
-        private readonly IMapper _mapper;
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly IHttpClientFactory _httpClientFactory;
 
         public TimerExpirationService(ILogger<TimerExpirationService> logger, 
-                                      IMapper mapper,
                                       IServiceScopeFactory scopeFactory, 
                                       IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
-            _mapper = mapper;
             _scopeFactory = scopeFactory;
             _httpClientFactory = httpClientFactory;
         }
