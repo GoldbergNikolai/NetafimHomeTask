@@ -23,6 +23,7 @@ namespace TimerService.Services.BackgroundServices
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            using var client = _httpClientFactory.CreateClient();
             while (!stoppingToken.IsCancellationRequested)
             {
                 using (var scope = _scopeFactory.CreateScope())
@@ -39,7 +40,6 @@ namespace TimerService.Services.BackgroundServices
                         try
                         {
                             timer.Status = Enums.Status.Finished.ToString();
-                            using var client = _httpClientFactory.CreateClient();
                             await client.PostAsync(timer.WebhookUrl, null);
 
                             context.Timers.Update(timer);
